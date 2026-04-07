@@ -161,7 +161,7 @@ results = self.model.predict(..., imgsz=1280)  # 默认640
 - Python: 3.11.4
 - GPU: NVIDIA RTX 3060 (可选，CPU 也可运行)
 - 摄像头: 普通 USB 摄像头 / 笔记本内置摄像头
-
+- 
 ---
 
 ## 🤝 贡献指南
