@@ -186,7 +186,7 @@ results = self.model.predict(..., imgsz=1280)  # 默认640
 
 ## 📧 联系方式
 
-如有问题或建议，请通过 [GitHub Issues](https://github.com/yourusername/yolov8-pose-gui/issues) 反馈。
+如有问题或建议，请通过 [GitHub Issues](https://github.com/aaron888hacker/yolov8-pose-gui/issues) 反馈。
 
 ---
 
