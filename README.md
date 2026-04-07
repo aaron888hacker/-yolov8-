@@ -129,10 +129,10 @@ results = self.model.predict(..., imgsz=1280)  # 默认640
 ```
 .
 ├── pose_gui.py            # 主程序（GUI + 姿态估计核心）
-├── yolov8n-pose.pt        # 预训练模型（需自行下载）
+├── yolov8n-pose.pt        # 预训练模型
 ├── requirements.txt       # 依赖列表
 ├── README.md              # 本文件
-└── examples/              # 示例图片/视频（可选）
+
 ```
 
 ---
