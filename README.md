@@ -183,6 +183,15 @@ results = self.model.predict(..., imgsz=1280)  # 默认640
 - [Pillow](https://python-pillow.org/) – 图像显示
 
 ---
+## Star History
+
+<a href="https://www.star-history.com/?repos=aaron888hacker%2F-yolov8-&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=aaron888hacker/-yolov8-&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=aaron888hacker/-yolov8-&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=aaron888hacker/-yolov8-&type=date&legend=top-left" />
+ </picture>
+</a>
 
 ## 📧 联系方式
 
