@@ -29,11 +29,11 @@
 ```
 ┌─────────────────────────────────────────────────┐
 │  [Load Model]  Model loaded    Conf: ███░░      │
-│  Tilt: ██░░░   Hunch: ██░░░    Bowed: ██░░░    │
+│  Tilt: ██░░░   Hunch: ██░░░    Bowed: ██░░░     │
 │  [Open Image] [Open Video] [Start Camera] [Stop]│
 ├─────────────────────────────────────────────────┤
 │                                                 │
-│              【实时视频/图片显示区域】           │
+│              【实时视频/图片显示区域】               │
 │                                                 │
 ├─────────────────────────────────────────────────┤
 │  2 person(s) detected                           │
@@ -56,7 +56,7 @@
 1. **克隆仓库**
    ```bash
    git clone https://github.com/aaron888hacker/-yolov8-.git
-   cd yolov8-pose-gui
+   cd -yolov8-
    ```
 
 2. **安装依赖包**
@@ -120,7 +120,7 @@ results = self.model.predict(..., imgsz=1280)  # 默认640
 修改 `PoseEstimator.analyze_sitting_pose` 的决策逻辑，或扩展 `determine_pose` 的返回值。
 
 ### 启用中文标签
-将 `fine_pose` 字符串改为中文（如 `'低头'`），并确保使用支持中文的字体（如 `simhei.ttf`）。在 `process_frame` 中可替换 `cv2.putText` 为 PIL 绘图（参考代码注释）。
+将 `fine_pose` 字符串改为中文（如 `'低头'`），并确保使用支持中文的字体（如 `times.ttf`）。在 `process_frame` 中可替换 `cv2.putText` 为 PIL 绘图（参考代码注释）。
 
 ---
 
@@ -141,17 +141,17 @@ results = self.model.predict(..., imgsz=1280)  # 默认640
 
 | 标签（英文）        | 含义           | 判断依据                     |
 |-------------------|----------------|-----------------------------|
-| standing          | 站立           | 膝盖伸直，髋部高于膝盖       |
-| sitting           | 坐姿（标准）   | 膝盖弯曲，髋部高于膝盖       |
-| sitting_low       | 低坐姿         | 膝盖弯曲且位置较低           |
-| leaning           | 微屈/倚靠      | 膝盖角度在125~160之间        |
-| normal sitting    | 正常坐姿       | 坐姿且各角度在正常范围内     |
-| bowed head        | 低头           | 颈部弯曲角度 > 阈值          |
-| hunchback         | 驼背           | 躯干前倾角度 > 阈值          |
-| left tilt         | 身体左侧斜     | 右肩高于左肩                 |
-| right tilt        | 身体右侧斜     | 左肩高于右肩                 |
-| squat             | 深蹲           | 膝盖角度 < 90°               |
-| unknown           | 无法判断       | 关键点置信度不足             |
+| standing          | 站立          | 膝盖伸直，髋部高于膝盖       |
+| sitting           | 坐姿（标准）    | 膝盖弯曲，髋部高于膝盖       |
+| sitting_low       | 低坐姿         | 膝盖弯曲且位置较低          |
+| leaning           | 微屈/倚靠      | 膝盖角度在125~160之间       |
+| normal sitting    | 正常坐姿       | 坐姿且各角度在正常范围内      |
+| bowed head        | 低头          | 颈部弯曲角度 > 阈值          |
+| hunchback         | 驼背          | 躯干前倾角度 > 阈值          |
+| left tilt         | 身体左侧斜     | 右肩高于左肩                |
+| right tilt        | 身体右侧斜     | 左肩高于右肩                |
+| squat             | 深蹲          | 膝盖角度 < 90°             |
+| unknown           | 无法判断       | 关键点置信度不足            |
 
 ---
 
