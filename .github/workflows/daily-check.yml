@@ -1,0 +1,47 @@
+name: Daily code check
+
+on:
+  schedule:
+    # UTC 01:00 = 北京时间 09:00，每天一次
+    - cron: "0 1 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: daily-code-check
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Syntax and lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install linter
+        run: python -m pip install --upgrade pip ruff
+
+      - name: Python syntax check
+        run: python -m compileall -q .
+
+      - name: Lint for fatal errors
+        run: ruff check --select E9,F63,F7,F82 --output-format=github .
+
+      - name: Run tests if present
+        run: |
+          if [ -d tests ]; then
+            python -m pip install pytest
+            python -m pytest -q
+          else
+            echo "No tests directory, skipping."
+          fi
