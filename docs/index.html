@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="YOLOv8-Pose 实时姿态检测系统：基于 YOLOv8-pose 的图形化姿态估计工具，支持图片、摄像头与视频输入，实时检测人体关键点并分析坐姿。">
+<meta name="theme-color" content="#0b1220">
+<title>YOLOv8-Pose 实时姿态检测系统</title>
+<style>
+  :root{
+    --bg:#0b1220; --panel:#111b2e; --line:#22304a; --text:#e8eefc;
+    --muted:#9aa9c2; --green:#4ade80; --cyan:#38bdf8; --amber:#fbbf24;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:radial-gradient(1200px 600px at 15% -10%,#16324f 0,transparent 60%),
+                        radial-gradient(900px 500px at 90% 0,#123a2f 0,transparent 55%),var(--bg);
+    color:var(--text); font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+    line-height:1.7; -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--cyan);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+  header{padding:76px 0 40px;display:grid;grid-template-columns:1.15fr .85fr;gap:36px;align-items:center}
+  .eyebrow{display:inline-block;font-size:12px;letter-spacing:2.5px;color:var(--green);
+    border:1px solid #2b5a45;background:#0f2a22;border-radius:999px;padding:5px 12px;margin-bottom:18px}
+  h1{font-size:clamp(30px,4.2vw,46px);line-height:1.25;margin:0 0 14px;letter-spacing:.5px}
+  h1 em{font-style:normal;color:var(--green)}
+  .lead{font-size:17px;color:var(--muted);margin:0 0 24px;max-width:56ch}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 26px;padding:0;list-style:none}
+  .badges li{font-size:12px;color:#cfe0f7;border:1px solid var(--line);background:#0e1728;border-radius:7px;padding:4px 9px}
+  .cta{display:flex;flex-wrap:wrap;gap:12px}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:11px;font-weight:650;
+    border:1px solid var(--line);color:var(--text);background:#111c30;transition:.18s}
+  .btn:hover{transform:translateY(-1px);text-decoration:none;border-color:#3a5175}
+  .btn.primary{background:linear-gradient(135deg,#22c55e,#0ea5e9);border-color:transparent;color:#04121a}
+  .hero-card{background:linear-gradient(180deg,#0f1b2d,#0c1526);border:1px solid var(--line);
+    border-radius:18px;padding:18px;box-shadow:0 24px 60px #0006}
+  .hero-card .bar{display:flex;gap:6px;margin-bottom:10px}
+  .hero-card .dot{width:9px;height:9px;border-radius:50%;background:#33445f}
+  .hero-card .dot:nth-child(1){background:#ef4444}.hero-card .dot:nth-child(2){background:#f59e0b}.hero-card .dot:nth-child(3){background:#22c55e}
+  .hero-card svg{display:block;width:100%;height:auto;border-radius:10px;background:
+    radial-gradient(ellipse at 50% 20%,#14263d 0,#0a1322 70%)}
+  .hero-card figcaption{font-size:12px;color:#7f91ac;margin-top:10px;text-align:center}
+  section{padding:44px 0}
+  h2{font-size:24px;margin:0 0 8px}
+  .sub{color:var(--muted);margin:0 0 26px;font-size:15px}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .card .ico{font-size:22px;display:block;margin-bottom:10px}
+  .card h3{font-size:16px;margin:0 0 6px}
+  .card p{margin:0;color:var(--muted);font-size:14px}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:6px}
+  .stat{background:#0e1829;border:1px solid var(--line);border-radius:14px;padding:18px;text-align:center}
+  .stat b{display:block;font-size:28px;line-height:1.2;color:var(--green)}
+  .stat span{font-size:13px;color:var(--muted)}
+  .states{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+  .state{border-radius:999px;padding:8px 14px;font-size:14px;border:1px solid var(--line);background:#101b2d}
+  .state.ok{color:var(--green);border-color:#2c5a44}
+  .state.warn{color:var(--amber);border-color:#5a4720}
+  pre{background:#0a1322;border:1px solid var(--line);border-radius:12px;padding:16px 18px;overflow:auto;
+    font-size:13.5px;line-height:1.8;color:#d7e5ff}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px}
+  .step{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px}
+  .step b{display:inline-block;width:24px;height:24px;line-height:24px;text-align:center;border-radius:7px;
+    background:#17324a;color:var(--cyan);font-size:13px;margin-right:8px}
+  .step h3{display:inline;font-size:15px}
+  .step p{color:var(--muted);font-size:13.5px;margin:8px 0 0}
+  .notice{border-left:3px solid var(--amber);background:#1c1a0f;color:#e8d9b0;padding:12px 16px;
+    border-radius:0 10px 10px 0;font-size:14px;margin-top:16px}
+  footer{border-top:1px solid var(--line);padding:26px 0 40px;color:#7f91ac;font-size:13px;
+    display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  @media(max-width:900px){
+    header{grid-template-columns:1fr;padding-top:52px}
+    .grid{grid-template-columns:repeat(2,1fr)}
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .steps{grid-template-columns:1fr}
+  }
+  @media(max-width:560px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div>
+      <span class="eyebrow">YOLOv8 · POSE · AI4LIFE</span>
+      <h1>YOLOv8-Pose<br><em>实时姿态检测系统</em></h1>
+      <p class="lead">基于 YOLOv8-pose 的图形化姿态估计工具。支持图片、摄像头与本地视频输入，实时检测人体关键点、绘制骨架，并识别低头、驼背、身体侧倾等坐姿。</p>
+      <ul class="badges">
+        <li>Python 3.8+</li>
+        <li>17 个 COCO 关键点</li>
+        <li>MIT License</li>
+        <li>Ultralytics YOLOv8</li>
+      </ul>
+      <div class="cta">
+        <a class="btn primary" href="https://github.com/aaron888hacker/-yolov8-/releases/download/v1.0.0/yolov8-v1.0.0.zip">⬇ 下载 v1.0.0</a>
+        <a class="btn" href="https://github.com/aaron888hacker/-yolov8-">查看源码</a>
+      </div>
+    </div>
+
+    <figure class="hero-card" style="margin:0">
+      <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+      <svg viewBox="0 0 320 240" role="img" aria-label="姿态检测示意：人体关键点与骨架">
+        <defs>
+          <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#4ade80" stop-opacity=".9"/>
+            <stop offset="1" stop-color="#38bdf8" stop-opacity=".9"/>
+          </linearGradient>
+        </defs>
+        <g stroke="url(#g)" stroke-width="4" stroke-linecap="round" fill="none">
+          <path d="M160 58 L160 128"/>
+          <path d="M160 78 L118 104 L96 146"/>
+          <path d="M160 78 L202 104 L224 146"/>
+          <path d="M160 128 L132 176 L126 216"/>
+          <path d="M160 128 L188 176 L194 216"/>
+        </g>
+        <g fill="#0b1220" stroke="url(#g)" stroke-width="3">
+          <circle cx="160" cy="38" r="14"/>
+          <circle cx="160" cy="78" r="5"/><circle cx="118" cy="104" r="5"/>
+          <circle cx="96" cy="146" r="5"/><circle cx="202" cy="104" r="5"/>
+          <circle cx="224" cy="146" r="5"/><circle cx="160" cy="128" r="5"/>
+          <circle cx="132" cy="176" r="5"/><circle cx="126" cy="216" r="5"/>
+          <circle cx="188" cy="176" r="5"/><circle cx="194" cy="216" r="5"/>
+        </g>
+        <rect x="18" y="18" width="86" height="24" rx="6" fill="#0f2a22" stroke="#2b5a45"/>
+        <text x="30" y="34" font-size="11" fill="#4ade80" font-family="system-ui">POSTURE OK</text>
+      </svg>
+      <figcaption>实时关键点检测 · 坐姿状态分析</figcaption>
+    </figure>
+  </header>
+
+  <section>
+    <h2>核心功能</h2>
+    <p class="sub">从输入到判断，全流程在本地完成。</p>
+    <div class="grid">
+      <div class="card"><span class="ico">🖼️</span><h3>多种输入源</h3><p>支持图片、摄像头与本地视频（.mp4 / .avi / .mov）。</p></div>
+      <div class="card"><span class="ico">🦴</span><h3>关键点与骨架</h3><p>基于 YOLOv8-pose 输出 17 个 COCO 关键点并绘制骨架。</p></div>
+      <div class="card"><span class="ico">🧍</span><h3>坐姿分析</h3><p>依据颈部、躯干与肩部角度，判断低头、驼背和左右侧斜。</p></div>
+      <div class="card"><span class="ico">👥</span><h3>多人检测</h3><p>画面中的多个人体可同时识别、标注与计数。</p></div>
+      <div class="card"><span class="ico">🎛️</span><h3>实时调参</h3><p>Tkinter 界面可调置信度、IOU 与姿态判断阈值。</p></div>
+      <div class="card"><span class="ico">⚡</span><h3>实时性能</h3><p>摄像头模式下可流畅运行，满足课堂与日常使用。</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>识别能力</h2>
+    <p class="sub">用简单规则把关键点转化为可读的姿态结论。</p>
+    <div class="stats">
+      <div class="stat"><b>17</b><span>COCO 关键点</span></div>
+      <div class="stat"><b>5</b><span>坐姿状态</span></div>
+      <div class="stat"><b>3</b><span>输入方式</span></div>
+      <div class="stat"><b>30fps+</b><span>摄像头实时</span></div>
+    </div>
+    <div class="states" aria-label="坐姿状态">
+      <span class="state ok">正常坐姿</span>
+      <span class="state warn">低头</span>
+      <span class="state warn">驼背</span>
+      <span class="state warn">左侧斜</span>
+      <span class="state warn">右侧斜</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>快速开始</h2>
+    <p class="sub">三分钟在本机跑起来。</p>
+    <div class="steps">
+      <div class="step"><b>1</b><h3>下载并解压</h3><p>获取 v1.0.0 源码包，或直接克隆仓库。</p></div>
+      <div class="step"><b>2</b><h3>安装依赖</h3><p>建议使用 Python 3.8+ 的虚拟环境。</p></div>
+      <div class="step"><b>3</b><h3>启动程序</h3><p>运行 GUI，载入模型后打开图片、视频或摄像头。</p></div>
+    </div>
+<pre><code>git clone https://github.com/aaron888hacker/-yolov8-.git
+cd -- -yolov8-
+pip install -r requirment.txt
+python pose_GUI.py</code></pre>
+    <div class="notice">GitHub Pages 只托管本介绍页。姿态检测程序依赖 Python、OpenCV、PyTorch 等运行环境，需要下载后在本地运行。</div>
+  </section>
+
+  <footer>
+    <span>© 2026 YOLOv8-Pose · MIT License</span>
+    <span><a href="https://github.com/aaron888hacker/-yolov8-">GitHub</a> · <a href="https://github.com/aaron888hacker/-yolov8-/releases">Releases</a></span>
+  </footer>
+</div>
+</body>
+</html>
