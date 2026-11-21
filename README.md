@@ -9,6 +9,8 @@
 
 ---
 
+![English Readme](https://github.com/aaron888hacker/-yolov8-/blob/main/README.en-US.md)
+
 ## 📌 功能特点
 
 - 🖼️ **多种输入源**：图片、摄像头、本地视频文件（.mp4/.avi/.mov）
