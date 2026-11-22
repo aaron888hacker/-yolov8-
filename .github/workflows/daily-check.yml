@@ -1,6 +1,16 @@
-name: Daily code check
+name: Code check
 
 on:
+  push:
+    paths:
+      - "**/*.py"
+      - "requirements.txt"
+      - ".github/workflows/**"
+  pull_request:
+    paths:
+      - "**/*.py"
+      - "requirements.txt"
+      - ".github/workflows/**"
   schedule:
     # UTC 01:00 = 北京时间 09:00，每天一次
     - cron: "0 1 * * *"
@@ -10,7 +20,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: daily-code-check
+  group: code-check-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
