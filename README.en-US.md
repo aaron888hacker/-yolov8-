@@ -28,20 +28,9 @@ A graphical pose estimation tool based on YOLOv8-pose, supporting **image, camer
 
 ## 🖼️ Interface Preview
 
-```
-┌─────────────────────────────────────────────────┐
-│  [Load Model]  Model loaded    Conf: ███░░      │
-│  Tilt: ██░░░   Hunch: ██░░░    Bowed: ██░░░     │
-│  [Open Image] [Open Video] [Start Camera] [Stop]│
-├─────────────────────────────────────────────────┤
-│                                                 │
-│              【Real-time Video/Image Display Area】               │
-│                                                 │
-├─────────────────────────────────────────────────┤
-│  2 person(s) detected                           │
-│  Status: Camera started                         │
-└─────────────────────────────────────────────────┘
-```
+<p align="center">
+  <img src="interface.png" alt="Interface Preview" width="900"/>
+</p>
 
 > During actual runtime, keypoints, skeletons, and posture labels for each person will be displayed.
 
