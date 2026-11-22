@@ -73,8 +73,6 @@ A graphical pose estimation tool based on YOLOv8-pose, supporting **image, camer
    Pillow>=9.0.0
    ```
 
-   > The legacy filename `requirment.txt` is still included with identical contents.
-
 3. **Download Pre-trained Model**  
    Place `yolov8n-pose.pt` (or `yolov8s-pose.pt` / `yolov8m-pose.pt`) in the project root directory.  
    Download link: [Ultralytics Assets](https://github.com/ultralytics/assets/releases)
@@ -85,10 +83,10 @@ A graphical pose estimation tool based on YOLOv8-pose, supporting **image, camer
 
 1. **Run the GUI**
    ```bash
-   python pose_GUI.py
+   python src/main.py
    ```
 
-   > `src/main.py` is an identical copy; `python src/main.py` works too.
+   > Run from the repository root so the relative paths of `yolov8n-pose.pt` and `times.ttf` resolve.
 
 2. **Load Model**: Click `Load Model` and wait for the "Model loaded" prompt.
 
@@ -134,12 +132,10 @@ Change the `fine_pose` string to Chinese (e.g., `'低头'`), and ensure a Chines
 
 ```
 .
-├── pose_GUI.py            # Main program (GUI + pose estimation core)
-├── src/main.py            # Identical copy of the main program
+├── src/main.py            # Main program (GUI + pose estimation core)
 ├── debug_pose.py          # Pose feature debugging script
 ├── yolov8n-pose.pt        # Pre-trained model
 ├── requirements.txt       # Dependency list (Python 3.8+)
-├── requirment.txt         # Legacy filename, same contents
 ├── times.ttf / STSONG.TTF # CJK fonts
 ├── res.json               # Sample detection output
 ├── docs/index.html        # GitHub Pages landing page

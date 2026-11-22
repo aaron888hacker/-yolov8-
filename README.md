@@ -73,8 +73,6 @@
    Pillow>=9.0.0
    ```
 
-   > 旧文件名 `requirment.txt` 仍保留且内容一致，两个文件名均可使用。
-
 3. **下载预训练模型**  
    将 `yolov8n-pose.pt`（或 `yolov8s-pose.pt` / `yolov8m-pose.pt`）放入项目根目录。  
    下载地址：[Ultralytics Assets](https://github.com/ultralytics/assets/releases)
@@ -85,10 +83,10 @@
 
 1. **运行 GUI**
    ```bash
-   python pose_GUI.py
+   python src/main.py
    ```
 
-   > `src/main.py` 与本文件内容一致，也可运行 `python src/main.py`。
+   > 请在仓库根目录运行，确保 `yolov8n-pose.pt` 与 `times.ttf` 的相对路径有效。
 
 2. **加载模型**：点击 `Load Model`，等待提示“Model loaded”。
 
@@ -134,12 +132,10 @@ results = self.model.predict(..., imgsz=1280)  # 默认640
 
 ```
 .
-├── pose_GUI.py            # 主程序（GUI + 姿态估计核心）
-├── src/main.py            # 同一程序的副本（内容一致）
+├── src/main.py            # 主程序（GUI + 姿态估计核心）
 ├── debug_pose.py          # 姿态特征调试脚本
 ├── yolov8n-pose.pt        # 预训练模型
 ├── requirements.txt       # 依赖列表（Python 3.8+）
-├── requirment.txt         # 旧文件名，内容与上者一致（兼容保留）
 ├── times.ttf / STSONG.TTF # 中文字体
 ├── res.json               # 单次检测结果示例
 ├── docs/index.html        # GitHub Pages 项目主页
