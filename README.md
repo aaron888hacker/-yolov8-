@@ -73,6 +73,8 @@
    Pillow>=9.0.0
    ```
 
+   > 旧文件名 `requirment.txt` 仍保留且内容一致，两个文件名均可使用。
+
 3. **下载预训练模型**  
    将 `yolov8n-pose.pt`（或 `yolov8s-pose.pt` / `yolov8m-pose.pt`）放入项目根目录。  
    下载地址：[Ultralytics Assets](https://github.com/ultralytics/assets/releases)
@@ -83,8 +85,10 @@
 
 1. **运行 GUI**
    ```bash
-   python pose_gui.py
+   python pose_GUI.py
    ```
+
+   > `src/main.py` 与本文件内容一致，也可运行 `python src/main.py`。
 
 2. **加载模型**：点击 `Load Model`，等待提示“Model loaded”。
 
@@ -106,20 +110,20 @@
 ## ⚙️ 配置与自定义
 
 ### 修改默认模型
-在 `PoseGUI.__init__` 中更改 `self.model_path`：
+在 `YOLOv8Pose.__init__` 中更改 `self.model_path`：
 ```python
 self.model_path = 'yolov8m-pose.pt'   # 改用 medium 模型提升精度
 ```
 
 ### 提高小目标检测能力
-在 `PoseEstimator.process_frame` 中增加 `imgsz` 参数：
+在 `YOLOv8Pose.process_frame` 中增加 `imgsz` 参数：
 ```python
 results = self.model.predict(..., imgsz=1280)  # 默认640
 ```
 > 注意：更高的分辨率会增加 GPU/CPU 负载。
 
 ### 添加新的姿态类别
-修改 `PoseEstimator.analyze_sitting_pose` 的决策逻辑，或扩展 `determine_pose` 的返回值。
+修改 `YOLOv8Pose.analyze_sitting_pose` 的决策逻辑，或扩展 `determine_pose` 的返回值。
 
 ### 启用中文标签
 将 `fine_pose` 字符串改为中文（如 `'低头'`），并确保使用支持中文的字体（如 `times.ttf`）。在 `process_frame` 中可替换 `cv2.putText` 为 PIL 绘图（参考代码注释）。
@@ -130,11 +134,18 @@ results = self.model.predict(..., imgsz=1280)  # 默认640
 
 ```
 .
-├── pose_gui.py            # 主程序（GUI + 姿态估计核心）
+├── pose_GUI.py            # 主程序（GUI + 姿态估计核心）
+├── src/main.py            # 同一程序的副本（内容一致）
+├── debug_pose.py          # 姿态特征调试脚本
 ├── yolov8n-pose.pt        # 预训练模型
-├── requirements.txt       # 依赖列表
-├── README.md              # 本文件
-
+├── requirements.txt       # 依赖列表（Python 3.8+）
+├── requirment.txt         # 旧文件名，内容与上者一致（兼容保留）
+├── times.ttf / STSONG.TTF # 中文字体
+├── res.json               # 单次检测结果示例
+├── docs/index.html        # GitHub Pages 项目主页
+├── .github/workflows/     # 每日语法与静态检查
+├── README.md              # 中文说明（本文件）
+└── README.en-US.md        # English README
 ```
 
 ---
@@ -163,7 +174,7 @@ results = self.model.predict(..., imgsz=1280)  # 默认640
 - Python: 3.11.4
 - GPU: NVIDIA RTX 3060 (可选，CPU 也可运行)
 - 摄像头: 普通 USB 摄像头 / 笔记本内置摄像头
-- 
+
 ---
 
 ## 🤝 贡献指南
@@ -197,7 +208,7 @@ results = self.model.predict(..., imgsz=1280)  # 默认640
 
 ## 📧 联系方式
 
-如有问题或建议，请通过 [GitHub Issues](https://github.com/aaron888hacker/yolov8-pose-gui/issues) 反馈。
+如有问题或建议，请通过 [GitHub Issues](https://github.com/aaron888hacker/-yolov8-/issues) 反馈。
 
 ---
 

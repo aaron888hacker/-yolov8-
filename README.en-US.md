@@ -73,6 +73,8 @@ A graphical pose estimation tool based on YOLOv8-pose, supporting **image, camer
    Pillow>=9.0.0
    ```
 
+   > The legacy filename `requirment.txt` is still included with identical contents.
+
 3. **Download Pre-trained Model**  
    Place `yolov8n-pose.pt` (or `yolov8s-pose.pt` / `yolov8m-pose.pt`) in the project root directory.  
    Download link: [Ultralytics Assets](https://github.com/ultralytics/assets/releases)
@@ -83,8 +85,10 @@ A graphical pose estimation tool based on YOLOv8-pose, supporting **image, camer
 
 1. **Run the GUI**
    ```bash
-   python pose_gui.py
+   python pose_GUI.py
    ```
+
+   > `src/main.py` is an identical copy; `python src/main.py` works too.
 
 2. **Load Model**: Click `Load Model` and wait for the "Model loaded" prompt.
 
@@ -106,20 +110,20 @@ A graphical pose estimation tool based on YOLOv8-pose, supporting **image, camer
 ## ⚙️ Configuration & Customization
 
 ### Change Default Model
-Modify `self.model_path` in `PoseGUI.__init__`:
+Modify `self.model_path` in `YOLOv8Pose.__init__`:
 ```python
 self.model_path = 'yolov8m-pose.pt'   # Use medium model to improve accuracy
 ```
 
 ### Improve Small Object Detection
-Increase the `imgsz` parameter in `PoseEstimator.process_frame`:
+Increase the `imgsz` parameter in `YOLOv8Pose.process_frame`:
 ```python
 results = self.model.predict(..., imgsz=1280)  # Default is 640
 ```
 > Note: Higher resolution will increase GPU/CPU load.
 
 ### Add New Pose Categories
-Modify the decision logic in `PoseEstimator.analyze_sitting_pose`, or extend the return values of `determine_pose`.
+Modify the decision logic in `YOLOv8Pose.analyze_sitting_pose`, or extend the return values of `determine_pose`.
 
 ### Enable Chinese Labels
 Change the `fine_pose` string to Chinese (e.g., `'低头'`), and ensure a Chinese-supporting font is used (e.g., `times.ttf`). In `process_frame`, you can replace `cv2.putText` with PIL drawing (refer to code comments).
@@ -130,11 +134,18 @@ Change the `fine_pose` string to Chinese (e.g., `'低头'`), and ensure a Chines
 
 ```
 .
-├── pose_gui.py            # Main program (GUI + Core Pose Estimation)
+├── pose_GUI.py            # Main program (GUI + pose estimation core)
+├── src/main.py            # Identical copy of the main program
+├── debug_pose.py          # Pose feature debugging script
 ├── yolov8n-pose.pt        # Pre-trained model
-├── requirements.txt       # Dependency list
-├── README.md              # This file
-
+├── requirements.txt       # Dependency list (Python 3.8+)
+├── requirment.txt         # Legacy filename, same contents
+├── times.ttf / STSONG.TTF # CJK fonts
+├── res.json               # Sample detection output
+├── docs/index.html        # GitHub Pages landing page
+├── .github/workflows/     # Daily syntax and lint checks
+├── README.md              # Chinese README
+└── README.en-US.md        # English README (this file)
 ```
 
 ---
@@ -163,7 +174,7 @@ Change the `fine_pose` string to Chinese (e.g., `'低头'`), and ensure a Chines
 - Python: 3.11.4
 - GPU: NVIDIA RTX 3060 (Optional, runs on CPU as well)
 - Camera: Standard USB camera / Laptop built-in camera
-- 
+
 ---
 
 ## 🤝 Contributing Guidelines
@@ -197,7 +208,7 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## 📧 Contact
 
-For questions or suggestions, please provide feedback via [GitHub Issues](https://github.com/aaron888hacker/yolov8-pose-gui/issues).
+For questions or suggestions, please provide feedback via [GitHub Issues](https://github.com/aaron888hacker/-yolov8-/issues).
 
 ---
 
