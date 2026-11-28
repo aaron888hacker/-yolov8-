@@ -1,13 +1,33 @@
 
 
 # 🧍‍♂️ YOLOv8-Pose Real-time Pose Detection System
-**⭐ If this project is helpful to you, please consider giving it a Star!**
 
-A graphical pose estimation tool based on YOLOv8-pose, supporting **image, camera, and video file** inputs. It detects human keypoints in real-time, draws skeletons, and identifies fine-grained poses such as **normal sitting, head bowing, slouching, and body tilting**.
+[English](README.en-US.md) · [简体中文](README.md)
 
-![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
-![Ultralytics](https://img.shields.io/badge/Ultralytics-YOLOv8-orange)
+<p align="center">
+  <a href="https://github.com/aaron888hacker/-yolov8-/stargazers"><img src="https://img.shields.io/github/stars/aaron888hacker/-yolov8-?style=flat-square&logo=github" alt="Stars"/></a>
+  <a href="https://github.com/aaron888hacker/-yolov8-/releases/latest"><img src="https://img.shields.io/github/v/release/aaron888hacker/-yolov8-?style=flat-square" alt="Latest release"/></a>
+  <img src="https://img.shields.io/badge/python-3.8%2B-blue?style=flat-square&logo=python" alt="Python 3.8+"/>
+  <img src="https://img.shields.io/badge/license-MIT-green?style=flat-square" alt="MIT License"/>
+  <a href="https://github.com/aaron888hacker/-yolov8-/actions/workflows/daily-check.yml"><img src="https://github.com/aaron888hacker/-yolov8-/actions/workflows/daily-check.yml/badge.svg" alt="Code check"/></a>
+</p>
+
+<p align="center"><strong>Out-of-the-box YOLOv8-Pose posture GUI</strong><br/>Detects 17 keypoints from images or a live camera and labels normal sitting, head bowing, slouching, and left/right tilt</p>
+
+> **Why star it?** No training and no GPU required — install the dependencies and run. Angle math, skeleton drawing, multi-person handling, and Chinese labels are all packaged in `src/main.py`. If it saves you a day of environment setup and threshold tuning, a star is the best way to say thanks.
+
+## ⚡ Quick Start
+
+```bash
+pip install -r requirements.txt
+python src/main.py
+```
+
+> Python 3.8+. Run from the repository root so `yolov8n-pose.pt` and `times.ttf` resolve.
+
+![Interface preview](interface.png)
+
+> During actual runtime, keypoints, skeletons, and posture labels for each person will be displayed.
 
 ---
 
@@ -23,16 +43,6 @@ A graphical pose estimation tool based on YOLOv8-pose, supporting **image, camer
 - 🖥️ **User-friendly GUI**: Tkinter interface with real-time adjustable confidence, IoU, and pose judgment thresholds
 - 🚀 **Real-time Performance**: Runs smoothly in camera mode (30fps+)
 - 👥 **Multi-person Detection**: Supports simultaneous recognition and annotation of multiple humans in the frame
-
----
-
-## 🖼️ Interface Preview
-
-<p align="center">
-  <img src="interface.png" alt="Interface Preview" width="900"/>
-</p>
-
-> During actual runtime, keypoints, skeletons, and posture labels for each person will be displayed.
 
 ---
 
@@ -190,6 +200,10 @@ This project is licensed under the [MIT License](LICENSE).
    <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=aaron888hacker/-yolov8-&type=date&legend=top-left" />
  </picture>
 </a>
+
+## 🔗 Related Projects
+
+- [DeepSeek-web2api](https://github.com/aaron888hacker/DeepSeek-web2api) — OpenAI / Anthropic compatible API for DeepSeek Chat, with streaming, reasoning, and function calling.
 
 ## 📧 Contact
 

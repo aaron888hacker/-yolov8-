@@ -1,0 +1,44 @@
+name: "✨ 功能建议 / Feature request"
+description: "希望增加或改进的功能 / Suggest an idea or improvement"
+title: "[Feature] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        请先描述使用场景和遇到的问题，而不只是功能名称。
+        Describe the use case and the problem first — not just the feature name.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: "你遇到什么问题 / What problem are you trying to solve?"
+      description: "越具体越好，例如“希望把检测结果导出为 CSV” / Be specific"
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: "期望的方案 / Proposed solution"
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: "备选方案 / Alternatives considered"
+      description: "你试过哪些替代做法？ / What workarounds have you tried?"
+
+  - type: input
+    id: version
+    attributes:
+      label: "版本 / Version"
+      placeholder: "v1.1.0 / 00a5569"
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: "确认 / Checklist"
+      options:
+        - label: "我已搜索现有 Issue，确认没有重复 / I searched existing issues and found no duplicate"
+          required: true

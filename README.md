@@ -1,11 +1,31 @@
 # 🧍‍♂️ YOLOv8-Pose 实时姿态检测系统
-**⭐ 如果这个项目对你有帮助，欢迎给个 Star！**
 
-基于 YOLOv8-pose 的图形化姿态估计工具，支持**图片、摄像头、视频文件**输入，实时检测人体关键点、绘制骨架，并识别**正常坐姿、低头、驼背、身体侧倾**等精细姿态。
+[简体中文](README.md) · [English](README.en-US.md)
 
-![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
-![Ultralytics](https://img.shields.io/badge/Ultralytics-YOLOv8-orange)
+<p align="center">
+  <a href="https://github.com/aaron888hacker/-yolov8-/stargazers"><img src="https://img.shields.io/github/stars/aaron888hacker/-yolov8-?style=flat-square&logo=github" alt="Stars"/></a>
+  <a href="https://github.com/aaron888hacker/-yolov8-/releases/latest"><img src="https://img.shields.io/github/v/release/aaron888hacker/-yolov8-?style=flat-square" alt="Latest release"/></a>
+  <img src="https://img.shields.io/badge/python-3.8%2B-blue?style=flat-square&logo=python" alt="Python 3.8+"/>
+  <img src="https://img.shields.io/badge/license-MIT-green?style=flat-square" alt="MIT License"/>
+  <a href="https://github.com/aaron888hacker/-yolov8-/actions/workflows/daily-check.yml"><img src="https://github.com/aaron888hacker/-yolov8-/actions/workflows/daily-check.yml/badge.svg" alt="Code check"/></a>
+</p>
+
+<p align="center"><strong>开箱即用的 YOLOv8-Pose 坐姿识别 GUI</strong><br/>图片 / 摄像头实时检测 17 个关键点，自动判断正常坐姿、低头、驼背、左右侧倾</p>
+
+> **为什么值得 Star？** 不需要训练、不需要 GPU，装完依赖就能跑；角度计算、骨架绘制、多人检测、中文标签都封装在 `src/main.py` 里。如果它帮你省下了搭环境和调阈值的时间，点个 Star 就是最好的支持。
+
+## ⚡ 快速开始
+
+```bash
+pip install -r requirements.txt
+python src/main.py
+```
+
+> Python 3.8+。请在仓库根目录运行，确保 `yolov8n-pose.pt` 与 `times.ttf` 的相对路径有效。
+
+![界面预览](interface.png)
+
+> 实际运行时会显示每个人体的关键点、骨架和姿态标签。
 
 ---
 
@@ -23,16 +43,6 @@
 - 🖥️ **友好 GUI**：Tkinter 界面，可实时调节置信度、IOU、姿态判断阈值
 - 🚀 **实时性能**：摄像头模式下可流畅运行（30fps+）
 - 👥 **多人检测**：支持画面中多个人体同时识别与标注
-
----
-
-## 🖼️ 界面预览
-
-<p align="center">
-  <img src="interface.png" alt="界面预览" width="900"/>
-</p>
-
-> 实际运行时会显示每个人体的关键点、骨架和姿态标签。
 
 ---
 
@@ -190,6 +200,10 @@ results = self.model.predict(..., imgsz=1280)  # 默认640
    <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=aaron888hacker/-yolov8-&type=date&legend=top-left" />
  </picture>
 </a>
+
+## 🔗 相关项目
+
+- [DeepSeek-web2api](https://github.com/aaron888hacker/DeepSeek-web2api) — 把 DeepSeek 网页版封装成 OpenAI / Anthropic 兼容 API，支持流式输出、思维链与 Function Calling。
 
 ## 📧 联系方式
 

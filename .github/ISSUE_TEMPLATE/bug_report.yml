@@ -1,0 +1,72 @@
+name: "🐛 Bug 报告 / Bug report"
+description: "程序报错、结果不对或行为异常 / Something is broken"
+title: "[Bug] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢反馈！请尽量提供可复现的信息。
+        Thanks for the report — please include enough detail to reproduce.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: "发生了什么 / What happened?"
+      description: "实际结果与完整报错信息 / Actual result and the full error message"
+      placeholder: "例如：加载模型后点击打开图片，程序直接退出……"
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: "复现步骤 / Steps to reproduce"
+      placeholder: |
+        1. …
+        2. …
+        3. …
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: "期望结果 / Expected behaviour"
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: "版本 / Version"
+      description: "Release tag、commit 或运行方式 / release tag, commit, or how you run it"
+      placeholder: "v1.1.0 / 00a5569 / source"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: "系统 / OS"
+      options:
+        - Windows
+        - macOS
+        - Linux
+        - Docker
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: "日志 / Logs"
+      description: "相关日志、错误堆栈或截图 / Relevant logs, traceback, or screenshots"
+      render: shell
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: "确认 / Checklist"
+      options:
+        - label: "我已搜索现有 Issue，确认没有重复 / I searched existing issues and found no duplicate"
+          required: true
